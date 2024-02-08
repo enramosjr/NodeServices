@@ -3,12 +3,11 @@
 
 using System;
 
-namespace Microsoft.AspNetCore.NodeServices.HostingModels
+namespace Cynosure.NodeServices.HostingModels
 {
     /// <summary>
     /// Describes an RPC call sent from .NET code to Node.js code.
     /// </summary>
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
     public class NodeInvocationInfo
     {
         /// <summary>

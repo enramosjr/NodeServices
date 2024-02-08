@@ -3,12 +3,11 @@
 
 using System;
 
-namespace Microsoft.AspNetCore.NodeServices.HostingModels
+namespace Cynosure.NodeServices.HostingModels
 {
     /// <summary>
     /// Represents an exception caused by invoking Node.js code.
     /// </summary>
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
     public class NodeInvocationException : Exception
     {
         /// <summary>

@@ -5,12 +5,11 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.AspNetCore.NodeServices.HostingModels
+namespace Cynosure.NodeServices.HostingModels
 {
     /// <summary>
     /// Represents an instance of Node.js to which Remote Procedure Calls (RPC) may be sent.
     /// </summary>
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
     public interface INodeInstance : IDisposable
     {
         /// <summary>

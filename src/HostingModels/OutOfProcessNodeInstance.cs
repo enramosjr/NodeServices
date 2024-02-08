@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
-namespace Microsoft.AspNetCore.NodeServices.HostingModels
+namespace Cynosure.NodeServices.HostingModels
 {
     /// <summary>
     /// Class responsible for launching a Node child process on the local machine, determining when it is ready to
@@ -21,8 +21,7 @@ namespace Microsoft.AspNetCore.NodeServices.HostingModels
     /// derived classes use to actually perform the invocations (e.g., they could use HTTP-RPC, or a binary TCP
     /// protocol, or any other RPC-type mechanism).
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.NodeServices.HostingModels.INodeInstance" />
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
+    /// <seealso cref="INodeInstance" />
     public abstract class OutOfProcessNodeInstance : INodeInstance
     {
         /// <summary>
@@ -30,7 +29,7 @@ namespace Microsoft.AspNetCore.NodeServices.HostingModels
         /// </summary>
         protected readonly ILogger OutputLogger;
 
-        private const string ConnectionEstablishedMessage = "[Microsoft.AspNetCore.NodeServices:Listening]";
+        private const string ConnectionEstablishedMessage = "[Cynosure.NodeServices:Listening]";
         private readonly TaskCompletionSource<object> _connectionIsReadySource = new TaskCompletionSource<object>();
         private bool _disposed;
         private readonly StringAsTempFile _entryPointScript;

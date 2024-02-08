@@ -4,11 +4,11 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.NodeServices.HostingModels;
+using Cynosure.NodeServices.HostingModels;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Microsoft.AspNetCore.NodeServices
+namespace Cynosure.NodeServices
 {
     [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
     public class NodeServicesTest : IDisposable

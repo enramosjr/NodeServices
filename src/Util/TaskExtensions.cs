@@ -5,12 +5,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.AspNetCore.NodeServices
+namespace Cynosure.NodeServices
 {
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
     internal static class TaskExtensions
     {
-        [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
         public static Task OrThrowOnCancellation(this Task task, CancellationToken cancellationToken)
         {
             return task.IsCompleted
@@ -21,8 +19,7 @@ namespace Microsoft.AspNetCore.NodeServices
                     TaskContinuationOptions.ExecuteSynchronously,
                     TaskScheduler.Default);
         }
-
-        [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
+        
         public static Task<T> OrThrowOnCancellation<T>(this Task<T> task, CancellationToken cancellationToken)
         {
             return task.IsCompleted

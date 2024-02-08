@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using Microsoft.AspNetCore.NodeServices.HostingModels;
+using Cynosure.NodeServices.HostingModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -15,12 +15,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 #endif
 
-namespace Microsoft.AspNetCore.NodeServices
+namespace Cynosure.NodeServices
 {
     /// <summary>
     /// Describes options used to configure an <see cref="INodeServices"/> instance.
     /// </summary>
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
     public class NodeServicesOptions
     {
         internal const string TimeoutConfigPropertyName = nameof(InvocationTimeoutMilliseconds);
@@ -126,6 +125,6 @@ namespace Microsoft.AspNetCore.NodeServices
         /// <summary>
         /// Allows explicitly specifying what port HttpNodeInstance will bind to.
         /// </summary>
-        public int BindingPort { get; set; } = 2222;
+        public int BindingPort { get; set; } = 0;
     }
 }

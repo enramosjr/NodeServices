@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Microsoft.AspNetCore.NodeServices.csproj" />
+    <ProjectReference Include="..\src\Cynosure.NodeServices.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,14 +5,13 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Microsoft.AspNetCore.NodeServices
+namespace Cynosure.NodeServices
 {
     /// <summary>
     /// Represents the ability to invoke code in a Node.js environment. Although the underlying Node.js instance
     /// might change over time (e.g., the process might be restarted), the <see cref="INodeServices"/> instance
     /// will remain constant.
     /// </summary>
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
     public interface INodeServices : IDisposable
     {
         /// <summary>

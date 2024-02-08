@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
-namespace Microsoft.AspNetCore.NodeServices.HostingModels
+namespace Cynosure.NodeServices.HostingModels
 {
     /// <summary>
     /// A specialisation of the OutOfProcessNodeInstance base class that uses HTTP to perform RPC invocations.
@@ -21,12 +21,11 @@ namespace Microsoft.AspNetCore.NodeServices.HostingModels
     /// input/output-based mechanism that the base class uses to determine when the child process is ready to
     /// accept RPC invocations.
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.NodeServices.HostingModels.OutOfProcessNodeInstance" />
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
+    /// <seealso cref="OutOfProcessNodeInstance" />
     internal class HttpNodeInstance : OutOfProcessNodeInstance
     {
         private static readonly Regex EndpointMessageRegex =
-            new Regex(@"^\[Microsoft.AspNetCore.NodeServices.HttpNodeHost:Listening on {(.*?)} port (\d+)\]$");
+            new Regex(@"^\[Cynosure.NodeServices.HttpNodeHost:Listening on {(.*?)} port (\d+)\]$");
 
         private static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
         {

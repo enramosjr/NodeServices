@@ -2,21 +2,19 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System;
-using Microsoft.AspNetCore.NodeServices;
+using Cynosure.NodeServices;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
     /// Extension methods for setting up NodeServices in an <see cref="IServiceCollection" />.
     /// </summary>
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
     public static class NodeServicesServiceCollectionExtensions
     {
         /// <summary>
         /// Adds NodeServices support to the <paramref name="serviceCollection"/>.
         /// </summary>
         /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
-        [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
         public static void AddNodeServices(this IServiceCollection serviceCollection)
             => AddNodeServices(serviceCollection, _ => {});
 
@@ -25,7 +23,6 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
         /// <param name="setupAction">A callback that will be invoked to populate the <see cref="NodeServicesOptions"/>.</param>
-        [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
         public static void AddNodeServices(this IServiceCollection serviceCollection, Action<NodeServicesOptions> setupAction)
         {
             if (setupAction == null)

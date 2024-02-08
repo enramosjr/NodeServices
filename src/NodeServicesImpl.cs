@@ -4,9 +4,9 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.NodeServices.HostingModels;
+using Cynosure.NodeServices.HostingModels;
 
-namespace Microsoft.AspNetCore.NodeServices
+namespace Cynosure.NodeServices
 {
     /// <summary>
     /// Default implementation of INodeServices. This is the primary API surface through which developers
@@ -19,8 +19,7 @@ namespace Microsoft.AspNetCore.NodeServices
     /// alive for a defined period so that any in-flight RPC calls can complete. This latter feature is
     /// analogous to the "connection draining" feature implemented by HTTP load balancers.
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.NodeServices.INodeServices" />
-    [Obsolete("Use Microsoft.AspNetCore.SpaServices.Extensions")]
+    /// <seealso cref="INodeServices" />
     internal class NodeServicesImpl : INodeServices
     {
         private static TimeSpan ConnectionDrainingTimespan = TimeSpan.FromSeconds(15);
