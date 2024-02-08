@@ -37,15 +37,17 @@ namespace Microsoft.AspNetCore.NodeServices.HostingModels
         private readonly HttpClient _client;
         private bool _disposed;
         private string _endpoint;
+        private string _bindingAddress;
+        private int _bindingPort;
 
-        public HttpNodeInstance(NodeServicesOptions options, int port = 0)
+        public HttpNodeInstance(NodeServicesOptions options)
         : base(
                 EmbeddedResourceReader.Read(
                     typeof(HttpNodeInstance),
                     "/Content/Node/entrypoint-http.js"),
                 options.ProjectPath,
                 options.WatchFileExtensions,
-                MakeCommandLineOptions(port),
+                MakeCommandLineOptions(options.BindingPort),
                 options.ApplicationStoppingToken,
                 options.NodeInstanceOutputLogger,
                 options.EnvironmentVariables,
@@ -53,6 +55,8 @@ namespace Microsoft.AspNetCore.NodeServices.HostingModels
                 options.LaunchWithDebugging,
                 options.DebuggingPort)
         {
+            _bindingAddress = options.BindingAddress ?? string.Empty;
+            _bindingPort = options.BindingPort;
             _client = new HttpClient();
             _client.Timeout = TimeSpan.FromMilliseconds(options.InvocationTimeoutMilliseconds + 1000);
         }
@@ -115,6 +119,13 @@ namespace Microsoft.AspNetCore.NodeServices.HostingModels
 
         protected override void OnOutputDataReceived(string outputData)
         {
+            // If BindingAddress was provided in the options, we'll always use
+            // that value rather than parsing for it.
+            if (!string.IsNullOrEmpty(_bindingAddress) && string.IsNullOrEmpty(_endpoint))
+            {
+                _endpoint = $"http://{_bindingAddress}:{_bindingPort}";
+            }
+ 
             // Watch for "port selected" messages, and when observed, 
             // store the IP (IPv4/IPv6) and port number
             // so we can use it when making HTTP requests. The child process will always send
