@@ -117,5 +117,15 @@ namespace Microsoft.AspNetCore.NodeServices
         /// A token that indicates when the host application is stopping.
         /// </summary>
         public CancellationToken ApplicationStoppingToken { get; set; }
+
+        /// <summary>
+        /// Allows explicitly specifying what address <> will bind to.
+        /// </summary>
+        public string BindingAddressOverride {get;set;}
+        
+        /// <summary>
+        /// Allows explicitly specifying what port <> will bind to.
+        /// </summary>
+        public int BindingPortOverride {get;set;}
     }
 }
