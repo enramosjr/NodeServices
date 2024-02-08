@@ -36,7 +36,7 @@ namespace Microsoft.AspNetCore.NodeServices
         {
             if (serviceProvider == null)
             {
-                throw new ArgumentNullException(nameof (serviceProvider));
+                throw new ArgumentNullException(nameof(serviceProvider));
             }
 
             EnvironmentVariables = new Dictionary<string, string>();
@@ -45,7 +45,7 @@ namespace Microsoft.AspNetCore.NodeServices
 
             ProjectPath = Directory.GetCurrentDirectory();
 
-            #if NETCOREAPP
+#if NETCOREAPP
             var hostEnv = serviceProvider.GetService<IWebHostEnvironment>();
             if (hostEnv != null)
             {
@@ -60,7 +60,7 @@ namespace Microsoft.AspNetCore.NodeServices
             {
                 ApplicationStoppingToken = applicationLifetime.ApplicationStopping;
             }
-            #endif
+#endif
 
             // If the DI system gives us a logger, use it. Otherwise, set up a default one.
             var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
@@ -119,13 +119,13 @@ namespace Microsoft.AspNetCore.NodeServices
         public CancellationToken ApplicationStoppingToken { get; set; }
 
         /// <summary>
-        /// Allows explicitly specifying what address <> will bind to.
+        /// Allows explicitly specifying what address HttpNodeInstance will bind to.
         /// </summary>
-        public string BindingAddressOverride {get;set;}
-        
+        public string BindingAddress { get; set; }
+
         /// <summary>
-        /// Allows explicitly specifying what port <> will bind to.
+        /// Allows explicitly specifying what port HttpNodeInstance will bind to.
         /// </summary>
-        public int BindingPortOverride {get;set;}
+        public int BindingPort { get; set; } = 2222;
     }
 }
