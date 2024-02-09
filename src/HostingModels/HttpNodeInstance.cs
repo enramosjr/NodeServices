@@ -8,8 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using System.Text.Json;
 
 namespace Cynosure.NodeServices.HostingModels
 {
@@ -27,11 +26,11 @@ namespace Cynosure.NodeServices.HostingModels
         private static readonly Regex EndpointMessageRegex =
             new Regex(@"^\[Cynosure.NodeServices.HttpNodeHost:Listening on {(.*?)} port (\d+)\]$");
 
-        private static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
-        {
-            ContractResolver = new CamelCasePropertyNamesContractResolver(),
-            TypeNameHandling = TypeNameHandling.None
-        };
+        // private static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings
+        // {
+        //     ContractResolver = new CamelCasePropertyNamesContractResolver(),
+        //     TypeNameHandling = TypeNameHandling.None
+        // };
 
         private readonly HttpClient _client;
         private bool _disposed;
@@ -68,7 +67,8 @@ namespace Cynosure.NodeServices.HostingModels
         protected override async Task<T> InvokeExportAsync<T>(
             NodeInvocationInfo invocationInfo, CancellationToken cancellationToken)
         {
-            var payloadJson = JsonConvert.SerializeObject(invocationInfo, jsonSerializerSettings);
+            
+            var payloadJson = JsonSerializer.Serialize(invocationInfo);
             var payload = new StringContent(payloadJson, Encoding.UTF8, "application/json");
             var response = await _client.PostAsync(_endpoint, payload, cancellationToken);
 
@@ -76,7 +76,7 @@ namespace Cynosure.NodeServices.HostingModels
             {
                 // Unfortunately there's no true way to cancel ReadAsStringAsync calls, hence AbandonIfCancelled
                 var responseJson = await response.Content.ReadAsStringAsync().OrThrowOnCancellation(cancellationToken);
-                var responseError = JsonConvert.DeserializeObject<RpcJsonResponse>(responseJson, jsonSerializerSettings);
+                var responseError = JsonSerializer.Deserialize<RpcJsonResponse>(responseJson);
 
                 throw new NodeInvocationException(responseError.ErrorMessage, responseError.ErrorDetails);
             }
@@ -98,7 +98,7 @@ namespace Cynosure.NodeServices.HostingModels
 
                 case "application/json":
                     var responseJson = await response.Content.ReadAsStringAsync().OrThrowOnCancellation(cancellationToken);
-                    return JsonConvert.DeserializeObject<T>(responseJson, jsonSerializerSettings);
+                    return JsonSerializer.Deserialize<T>(responseJson);
 
                 case "application/octet-stream":
                     // Streamed responses have to be received as System.IO.Stream instances

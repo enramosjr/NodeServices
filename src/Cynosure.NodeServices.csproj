@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>Invoke Node.js modules at runtime in ASP.NET Core applications.</Description>
-    <TargetFrameworks>netstandard2.0; netcoreapp3.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;net8.0</TargetFrameworks>
     <IsShippingPackage>true</IsShippingPackage>
   </PropertyGroup>
 
@@ -11,15 +11,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <FrameworkReference Condition="'$(TargetFramework)' == 'netcoreapp3.0'" Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <FrameworkReference Condition="'$(TargetFramework)' == 'net8.0'" Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.2.7" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.1" />
     <PackageReference Include="Yarn.MSBuild" Version="1.16.0" />
   </ItemGroup>
 
   <Sdk Name="Yarn.MSBuild" Version="1.15.2" />
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.1'">
     <YarnBuildCommand>run webpack --mode development</YarnBuildCommand>
     <YarnBuildCommand Condition="'$(Configuration)' == 'Release'">run webpack --mode production</YarnBuildCommand>
   </PropertyGroup>
